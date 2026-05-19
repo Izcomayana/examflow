@@ -36,14 +36,12 @@ export default function WhyExamFlow() {
           {/* Left - Benefits */}
           <div className="space-y-8">
             <div>
-              <h2 className={`text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance transition-all duration-700 ${
-                isVisible ? 'animate-fade-in-up' : 'opacity-0'
-              }`}>
+              <h2 className={`text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                }`}>
                 Why Choose ExamFlow?
               </h2>
-              <p className={`text-lg text-muted-foreground leading-relaxed transition-all duration-700 ${
-                isVisible ? 'animate-fade-in-up' : 'opacity-0'
-              }`} style={{ animationDelay: '0.1s' }}>
+              <p className={`text-lg text-muted-foreground leading-relaxed transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                }`} style={{ animationDelay: '0.1s' }}>
                 Built specifically for educational institutions, ExamFlow delivers measurable improvements in scheduling efficiency and accuracy.
               </p>
             </div>
@@ -52,11 +50,10 @@ export default function WhyExamFlow() {
               {benefits.map((benefit, index) => {
                 const Icon = benefit.icon
                 return (
-                  <div 
-                    key={index} 
-                    className={`flex gap-4 transition-all duration-700 ${
-                      isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                    }`}
+                  <div
+                    key={index}
+                    className={`flex gap-4 transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                      }`}
                     style={{ animationDelay: isVisible ? `${0.2 + index * 0.1}s` : '0s' }}
                   >
                     <div className="flex-shrink-0">
@@ -73,15 +70,13 @@ export default function WhyExamFlow() {
           </div>
 
           {/* Right - Illustration */}
-          <div className={`relative transition-all duration-700 ${
-            isVisible ? 'animate-fade-in-up' : 'opacity-0'
-          }`} style={{ animationDelay: '0.2s' }}>
+          <div className={`relative transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+            }`} style={{ animationDelay: '0.2s' }}>
             <div className="bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 rounded-2xl p-12 border border-border/50 min-h-96 flex flex-col justify-center">
               {/* Stats Showcase */}
               <div className="space-y-6">
-                <div className={`bg-white rounded-lg p-6 border border-border hover:shadow-lg transition-all duration-300 ${
-                  isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                }`} style={{ animationDelay: isVisible ? '0.4s' : '0s' }}>
+                <div className={`bg-white rounded-lg p-6 border border-border hover:shadow-lg transition-all duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                  }`} style={{ animationDelay: isVisible ? '0.4s' : '0s' }}>
                   <p className="text-sm text-muted-foreground mb-2">Scheduling Time Reduction</p>
                   <div className="flex items-end gap-2">
                     <div className="flex-1">
@@ -92,9 +87,8 @@ export default function WhyExamFlow() {
                   </div>
                 </div>
 
-                <div className={`bg-white rounded-lg p-6 border border-border hover:shadow-lg transition-all duration-300 ${
-                  isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                }`} style={{ animationDelay: isVisible ? '0.5s' : '0s' }}>
+                <div className={`bg-white rounded-lg p-6 border border-border hover:shadow-lg transition-all duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                  }`} style={{ animationDelay: isVisible ? '0.5s' : '0s' }}>
                   <p className="text-sm text-muted-foreground mb-2">Error Prevention</p>
                   <div className="flex items-end gap-2">
                     <div className="flex-1">
@@ -105,9 +99,8 @@ export default function WhyExamFlow() {
                   </div>
                 </div>
 
-                <div className={`bg-white rounded-lg p-6 border border-border hover:shadow-lg transition-all duration-300 ${
-                  isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                }`} style={{ animationDelay: isVisible ? '0.6s' : '0s' }}>
+                <div className={`bg-white rounded-lg p-6 border border-border hover:shadow-lg transition-all duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                  }`} style={{ animationDelay: isVisible ? '0.6s' : '0s' }}>
                   <p className="text-sm text-muted-foreground mb-2">Resource Efficiency</p>
                   <div className="flex items-end gap-2">
                     <div className="flex-1">

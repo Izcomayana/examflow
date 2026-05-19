@@ -11,9 +11,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
-          <div className={`col-span-1 md:col-span-1 transition-all duration-700 ${
-            isVisible ? 'animate-fade-in-up' : 'opacity-0'
-          }`}>
+          <div className={`col-span-1 md:col-span-1 transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+            }`}>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">E</span>
@@ -26,9 +25,8 @@ export default function Footer() {
           </div>
 
           {/* Product */}
-          <div className={`transition-all duration-700 ${
-            isVisible ? 'animate-fade-in-up' : 'opacity-0'
-          }`} style={{ animationDelay: '0.1s' }}>
+          <div className={`transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+            }`} style={{ animationDelay: '0.1s' }}>
             <h4 className="font-semibold mb-4">Product</h4>
             <ul className="space-y-2">
               <li>
@@ -50,9 +48,8 @@ export default function Footer() {
           </div>
 
           {/* Company */}
-          <div className={`transition-all duration-700 ${
-            isVisible ? 'animate-fade-in-up' : 'opacity-0'
-          }`} style={{ animationDelay: '0.2s' }}>
+          <div className={`transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+            }`} style={{ animationDelay: '0.2s' }}>
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2">
               <li>
@@ -74,9 +71,8 @@ export default function Footer() {
           </div>
 
           {/* Legal */}
-          <div className={`transition-all duration-700 ${
-            isVisible ? 'animate-fade-in-up' : 'opacity-0'
-          }`} style={{ animationDelay: '0.3s' }}>
+          <div className={`transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+            }`} style={{ animationDelay: '0.3s' }}>
             <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-2">
               <li>

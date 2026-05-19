@@ -43,17 +43,15 @@ export default function FeaturesSection() {
     <section ref={ref} id="features" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 
-            className={`text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance transition-all duration-700 ${
-              isVisible ? 'animate-fade-in-up' : 'opacity-0'
-            }`}
+          <h2
+            className={`text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+              }`}
           >
             Powerful Features Built for Universities
           </h2>
-          <p 
-            className={`text-lg text-muted-foreground max-w-2xl mx-auto transition-all duration-700 ${
-              isVisible ? 'animate-fade-in-up' : 'opacity-0'
-            }`}
+          <p
+            className={`text-lg text-muted-foreground max-w-2xl mx-auto transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+              }`}
             style={{ animationDelay: '0.1s' }}
           >
             Everything you need to streamline exam scheduling and eliminate conflicts.
@@ -66,9 +64,8 @@ export default function FeaturesSection() {
             return (
               <div
                 key={index}
-                className={`group bg-white border border-border rounded-xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${
-                  isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                }`}
+                className={`group bg-white border border-border rounded-xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                  }`}
                 style={{
                   animationDelay: isVisible ? `${0.1 + index * 0.1}s` : '0s'
                 }}

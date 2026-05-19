@@ -49,21 +49,18 @@ export default function FAQSection() {
     <section ref={ref} className="py-20 bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className={`text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance transition-all duration-700 ${
-            isVisible ? 'animate-fade-in-up' : 'opacity-0'
-          }`}>
+          <h2 className={`text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+            }`}>
             Frequently Asked Questions
           </h2>
-          <p className={`text-lg text-muted-foreground transition-all duration-700 ${
-            isVisible ? 'animate-fade-in-up' : 'opacity-0'
-          }`} style={{ animationDelay: '0.1s' }}>
+          <p className={`text-lg text-muted-foreground transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+            }`} style={{ animationDelay: '0.1s' }}>
             Find answers to common questions about ExamFlow.
           </p>
         </div>
 
-        <div className={`bg-white border border-border rounded-xl overflow-hidden transition-all duration-700 ${
-          isVisible ? 'animate-fade-in-up' : 'opacity-0'
-        }`} style={{ animationDelay: '0.2s' }}>
+        <div className={`bg-white border border-border rounded-xl overflow-hidden transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          }`} style={{ animationDelay: '0.2s' }}>
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem

@@ -24,7 +24,7 @@ export function LoginForm() {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000))
-      
+
       // For demo purposes, accept any credentials
       if (email && password) {
         router.push('/dashboard')

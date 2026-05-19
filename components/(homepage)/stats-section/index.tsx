@@ -73,9 +73,8 @@ export default function StatsSection() {
           {stats.map((stat, index) => (
             <div
               key={index}
-              className={`bg-white border border-border rounded-xl p-8 text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ${
-                isVisible ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
+              className={`bg-white border border-border rounded-xl p-8 text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                }`}
               style={{
                 animationDelay: isVisible ? `${0.1 + index * 0.1}s` : '0s'
               }}

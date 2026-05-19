@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { CheckCircle2, Calendar, Building2, BarChart3, Sparkles } from 'lucide-react'
 import { useScrollAnimation } from '@/hooks/use-scroll-animation'
+import Link from 'next/link'
 
 export default function HeroSection() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
@@ -27,18 +28,16 @@ export default function HeroSection() {
 
             {/* Main Heading */}
             <div className="space-y-4">
-              <h1 
-                className={`text-5xl md:text-6xl font-bold text-foreground leading-tight text-balance transition-all duration-700 ${
-                  isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                }`}
+              <h1
+                className={`text-5xl md:text-6xl font-bold text-foreground leading-tight text-balance transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                  }`}
                 style={{ animationDelay: '0.1s' }}
               >
                 Smart Exam Scheduling Made Effortless
               </h1>
-              <p 
-                className={`text-lg text-muted-foreground leading-relaxed text-balance transition-all duration-700 ${
-                  isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                }`}
+              <p
+                className={`text-lg text-muted-foreground leading-relaxed text-balance transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                  }`}
                 style={{ animationDelay: '0.2s' }}
               >
                 ExamFlow uses intelligent scheduling optimization to generate organized, conflict-free examination timetables for universities and institutions in minutes, not weeks.
@@ -46,18 +45,22 @@ export default function HeroSection() {
             </div>
 
             {/* CTA Buttons */}
-            <div 
-              className={`flex flex-col sm:flex-row gap-4 transition-all duration-700 ${
-                isVisible ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
+            <div
+              className={`flex flex-col sm:flex-row gap-4 transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                }`}
               style={{ animationDelay: '0.3s' }}
             >
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold text-base shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                Generate Smarter Schedules
-              </Button>
-              <Button size="lg" variant="outline" className="border-2 border-primary/30 text-foreground hover:bg-primary/5 font-semibold text-base transition-all duration-300">
-                Learn More
-              </Button>
+              <Link href="/login">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold text-base shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  Generate Smarter Schedules
+                </Button>
+              </Link>
+
+              <Link href="#features">
+                <Button size="lg" variant="outline" className="border-2 border-primary/30 text-foreground hover:bg-primary/5 font-semibold text-base transition-all duration-300">
+                  Learn More
+                </Button>
+              </Link>
             </div>
 
             {/* Feature List with Stagger */}
@@ -71,9 +74,8 @@ export default function HeroSection() {
                 return (
                   <div
                     key={idx}
-                    className={`flex items-center gap-3 transition-all duration-700 ${
-                      isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                    }`}
+                    className={`flex items-center gap-3 transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                      }`}
                     style={{ animationDelay: `${0.4 + idx * 0.1}s` }}
                   >
                     <Icon className="w-5 h-5 text-secondary flex-shrink-0" />
@@ -85,10 +87,9 @@ export default function HeroSection() {
           </div>
 
           {/* Right - Dynamic Dashboard Mockup */}
-          <div 
-            className={`relative transition-all duration-700 ${
-              isVisible ? 'animate-fade-in-up' : 'opacity-0'
-            }`}
+          <div
+            className={`relative transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+              }`}
             style={{ animationDelay: '0.2s' }}
           >
             <div className="relative bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl p-8 border border-border/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-300 group">
@@ -112,10 +113,10 @@ export default function HeroSection() {
                     { course: 'Web Development', date: 'Jan 16', hall: 'Hall B', time: '2:00 PM' },
                     { course: 'Database Design', date: 'Jan 17', hall: 'Hall C', time: '10:00 AM' },
                   ].map((item, i) => (
-                    <div 
-                      key={i} 
+                    <div
+                      key={i}
                       className="bg-white/50 backdrop-blur border border-border/30 rounded-lg p-4 hover:bg-white/80 hover:shadow-md transition-all duration-300 cursor-pointer group/card"
-                      style={{ 
+                      style={{
                         animation: isVisible ? `fadeInUp 0.6s ease-out forwards` : 'none',
                         animationDelay: isVisible ? `${0.5 + i * 0.1}s` : '0s'
                       }}
@@ -139,10 +140,10 @@ export default function HeroSection() {
                     { value: '0', label: 'Conflicts', color: 'text-secondary' },
                     { value: '12', label: 'Halls Used', color: 'text-accent' },
                   ].map((stat, idx) => (
-                    <div 
+                    <div
                       key={idx}
                       className="text-center py-3 hover:bg-white/30 rounded transition-colors"
-                      style={{ 
+                      style={{
                         animation: isVisible ? `scaleIn 0.6s ease-out forwards` : 'none',
                         animationDelay: isVisible ? `${0.7 + idx * 0.1}s` : '0s'
                       }}
@@ -159,7 +160,7 @@ export default function HeroSection() {
             </div>
 
             {/* Floating Badge with Animation */}
-            <div 
+            <div
               className="absolute -bottom-4 -right-4 bg-white border-2 border-border rounded-full p-4 shadow-lg animate-float"
               style={{ animationDelay: '0.5s' }}
             >

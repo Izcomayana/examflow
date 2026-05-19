@@ -10,22 +10,19 @@ export default function DashboardPreview() {
     <section ref={ref} className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className={`text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance transition-all duration-700 ${
-            isVisible ? 'animate-fade-in-up' : 'opacity-0'
-          }`}>
+          <h2 className={`text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+            }`}>
             Experience Smart Scheduling
           </h2>
-          <p className={`text-lg text-muted-foreground max-w-2xl mx-auto transition-all duration-700 ${
-            isVisible ? 'animate-fade-in-up' : 'opacity-0'
-          }`} style={{ animationDelay: '0.1s' }}>
+          <p className={`text-lg text-muted-foreground max-w-2xl mx-auto transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+            }`} style={{ animationDelay: '0.1s' }}>
             A powerful dashboard designed for administrators to manage exam scheduling with ease.
           </p>
         </div>
 
         {/* Dashboard Mockup */}
-        <div className={`relative bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 rounded-2xl overflow-hidden border border-border/50 shadow-2xl hover:shadow-3xl transition-all duration-500 ${
-          isVisible ? 'animate-fade-in-up' : 'opacity-0'
-        }`} style={{ animationDelay: '0.2s' }}>
+        <div className={`relative bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 rounded-2xl overflow-hidden border border-border/50 shadow-2xl hover:shadow-3xl transition-all duration-500 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          }`} style={{ animationDelay: '0.2s' }}>
           {/* Header Bar */}
           <div className="bg-white border-b border-border px-8 py-6 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -48,11 +45,10 @@ export default function DashboardPreview() {
                 { label: 'Conflicts', value: '0', icon: '⚠️', color: 'from-accent' },
                 { label: 'Halls Used', value: '12', icon: '🏫', color: 'from-indigo-500' },
               ].map((stat, i) => (
-                <div 
-                  key={i} 
-                  className={`bg-white border border-border rounded-lg p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300 ${
-                    isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                  }`}
+                <div
+                  key={i}
+                  className={`bg-white border border-border rounded-lg p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                    }`}
                   style={{
                     animationDelay: isVisible ? `${0.3 + i * 0.08}s` : '0s'
                   }}
@@ -67,9 +63,8 @@ export default function DashboardPreview() {
             </div>
 
             {/* Timetable Preview */}
-            <div className={`bg-white border border-border rounded-lg p-6 hover:shadow-lg transition-all duration-300 ${
-              isVisible ? 'animate-fade-in-up' : 'opacity-0'
-            }`} style={{ animationDelay: isVisible ? '0.6s' : '0s' }}>
+            <div className={`bg-white border border-border rounded-lg p-6 hover:shadow-lg transition-all duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+              }`} style={{ animationDelay: isVisible ? '0.6s' : '0s' }}>
               <h4 className="text-lg font-bold text-foreground mb-4">Generated Timetable</h4>
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -89,11 +84,10 @@ export default function DashboardPreview() {
                       { course: 'Database Design', date: 'Jan 17', time: '10:00 AM', hall: 'Hall C', capacity: '80/100' },
                       { course: 'AI & ML', date: 'Jan 18', time: '1:00 PM', hall: 'Hall D', capacity: '60/80' },
                     ].map((item, i) => (
-                      <tr 
-                        key={i} 
-                        className={`border-b border-border/50 hover:bg-muted/30 transition-all duration-300 ${
-                          isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                        }`}
+                      <tr
+                        key={i}
+                        className={`border-b border-border/50 hover:bg-muted/30 transition-all duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                          }`}
                         style={{
                           animationDelay: isVisible ? `${0.7 + i * 0.08}s` : '0s'
                         }}
@@ -116,9 +110,8 @@ export default function DashboardPreview() {
 
             {/* Hall Allocation */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className={`bg-white border border-border rounded-lg p-6 hover:shadow-lg transition-all duration-300 ${
-                isVisible ? 'animate-fade-in-up' : 'opacity-0'
-              }`} style={{ animationDelay: isVisible ? '1s' : '0s' }}>
+              <div className={`bg-white border border-border rounded-lg p-6 hover:shadow-lg transition-all duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                }`} style={{ animationDelay: isVisible ? '1s' : '0s' }}>
                 <h4 className="text-lg font-bold text-foreground mb-4">Hall Allocation</h4>
                 <div className="space-y-3">
                   {[
@@ -137,7 +130,7 @@ export default function DashboardPreview() {
                       <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
                         <div
                           className="bg-gradient-to-r from-primary to-accent h-2 rounded-full transition-all duration-1000"
-                          style={{ 
+                          style={{
                             width: isVisible ? `${item.usage}%` : '0%'
                           }}
                         ></div>
@@ -148,9 +141,8 @@ export default function DashboardPreview() {
                 </div>
               </div>
 
-              <div className={`bg-white border border-border rounded-lg p-6 hover:shadow-lg transition-all duration-300 ${
-                isVisible ? 'animate-fade-in-up' : 'opacity-0'
-              }`} style={{ animationDelay: isVisible ? '1.1s' : '0s' }}>
+              <div className={`bg-white border border-border rounded-lg p-6 hover:shadow-lg transition-all duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                }`} style={{ animationDelay: isVisible ? '1.1s' : '0s' }}>
                 <h4 className="text-lg font-bold text-foreground mb-4">Conflict Detection</h4>
                 <div className="space-y-3">
                   {[
@@ -158,11 +150,10 @@ export default function DashboardPreview() {
                     { title: 'No Room Conflicts', desc: 'All halls optimally allocated' },
                     { title: 'Student Schedule OK', desc: 'No overlapping exams for students' },
                   ].map((item, i) => (
-                    <div 
+                    <div
                       key={i}
-                      className={`flex items-center gap-3 p-3 bg-secondary/10 rounded-lg hover:bg-secondary/20 transition-all duration-300 ${
-                        isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                      }`}
+                      className={`flex items-center gap-3 p-3 bg-secondary/10 rounded-lg hover:bg-secondary/20 transition-all duration-300 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                        }`}
                       style={{
                         animationDelay: isVisible ? `${1.2 + i * 0.1}s` : '0s'
                       }}
