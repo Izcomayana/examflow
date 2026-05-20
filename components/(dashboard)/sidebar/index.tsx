@@ -2,17 +2,16 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Zap, BookOpen, Building2, Calendar, AlertTriangle, Download, Settings, LogOut, Menu, X } from 'lucide-react'
+import { LayoutDashboard, Zap, BookOpen, Building2, Calendar, AlertTriangle, LogOut, X } from 'lucide-react'
 import { useSidebar } from '@/contexts/sidebar-context'
 
 const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
-  { icon: Zap, label: 'Generator', href: '/dashboard/generator' },
   { icon: BookOpen, label: 'Courses', href: '/dashboard/courses' },
   { icon: Building2, label: 'Halls & Venues', href: '/dashboard/halls' },
+  { icon: Zap, label: 'Generator', href: '/dashboard/generator' },
   { icon: Calendar, label: 'Timetables', href: '/dashboard/timetables' },
   { icon: AlertTriangle, label: 'Conflicts', href: '/dashboard/conflicts' },
-  { icon: Download, label: 'Exports', href: '/dashboard/exports' },
 ]
 
 export function Sidebar() {

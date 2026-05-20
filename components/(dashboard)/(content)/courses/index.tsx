@@ -3,79 +3,100 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Search, Plus, Edit, Trash2, MoreVertical } from 'lucide-react'
+import { CourseModal } from '../(modals)/course-modal'
+import { useCourseStore } from '@/store/course-store'
 
-const mockCourses = [
-  {
-    id: 1,
-    code: 'CSC401',
-    name: 'Data Structures',
-    department: 'Computer Science',
-    level: '400',
-    students: 85,
-    status: 'active',
-  },
-  {
-    id: 2,
-    code: 'CSC402',
-    name: 'Web Development',
-    department: 'Computer Science',
-    level: '400',
-    students: 92,
-    status: 'active',
-  },
-  {
-    id: 3,
-    code: 'MTH301',
-    name: 'Calculus III',
-    department: 'Mathematics',
-    level: '300',
-    students: 120,
-    status: 'active',
-  },
-  {
-    id: 4,
-    code: 'PHY201',
-    name: 'Physics II',
-    department: 'Physics',
-    level: '200',
-    students: 150,
-    status: 'active',
-  },
-  {
-    id: 5,
-    code: 'CSC403',
-    name: 'Database Design',
-    department: 'Computer Science',
-    level: '400',
-    students: 78,
-    status: 'archived',
-  },
-]
+interface Course {
+  id: number
+  code: string
+  name: string
+  department: string
+  level: string
+  students: number
+}
 
 export function CoursesContent() {
   const [searchQuery, setSearchQuery] = useState('')
   const [departmentFilter, setDepartmentFilter] = useState('')
   const [levelFilter, setLevelFilter] = useState('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalMode, setModalMode] = useState<'add' | 'edit'>('add')
+  const [selectedCourse, setSelectedCourse] = useState<Course | undefined>()
 
-  const filteredCourses = mockCourses.filter((course) => {
+  const {
+    courses,
+    addCourse,
+    updateCourse,
+    deleteCourse,
+  } = useCourseStore()
+
+  const filteredCourses = courses.filter((course) => {
     const matchesSearch =
-      course.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      course.name.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesDepartment = !departmentFilter || course.department === departmentFilter
-    const matchesLevel = !levelFilter || course.level === levelFilter
+      course.code
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      course.name
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
 
-    return matchesSearch && matchesDepartment && matchesLevel
+    const matchesDepartment =
+      !departmentFilter ||
+      course.department === departmentFilter
+
+    const matchesLevel =
+      !levelFilter ||
+      course.level === levelFilter
+
+    return (
+      matchesSearch &&
+      matchesDepartment &&
+      matchesLevel
+    )
   })
+
+  const openAddModal = () => {
+    setModalMode('add')
+    setSelectedCourse(undefined)
+    setIsModalOpen(true)
+  }
+
+  const openEditModal = (course: Course) => {
+    setModalMode('edit')
+    setSelectedCourse(course)
+    setIsModalOpen(true)
+  }
+
+  const handleModalSubmit = (
+    courseData: Omit<Course, 'id'>
+  ) => {
+    if (modalMode === 'add') {
+      addCourse(courseData)
+    } else if (selectedCourse) {
+      updateCourse(
+        selectedCourse.id,
+        {
+          ...courseData,
+          id: selectedCourse.id,
+        }
+      )
+    }
+  }
+
+  const handleDeleteCourse = (
+    id: number
+  ) => {
+    deleteCourse(id)
+  }
 
   return (
     <div className="space-y-6 pt-20">
       {/* Header */}
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+      <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Course Management</h1>
           <p className="text-muted-foreground mt-1">Manage all exam courses and their details</p>
         </div>
-        <Button className="bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg">
+        <Button onClick={openAddModal} className="bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg">
           <Plus className="w-4 h-4 mr-2" />
           Add Course
         </Button>
@@ -151,9 +172,6 @@ export function CoursesContent() {
                     Students
                   </th>
                   <th className="px-6 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -182,25 +200,12 @@ export function CoursesContent() {
                       <span className="text-foreground font-medium">{course.students}</span>
                     </td>
                     <td className="px-6 py-4">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${course.status === 'active'
-                            ? 'bg-secondary/10 text-secondary'
-                            : 'bg-slate-200/50 text-slate-600'
-                          }`}
-                      >
-                        {course.status === 'active' ? 'Active' : 'Archived'}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <button className="p-2 hover:bg-slate-100 rounded-lg transition-colors" title="Edit">
+                        <button onClick={() => openEditModal(course)} className="p-2 hover:bg-slate-100 rounded-lg transition-colors" title="Edit">
                           <Edit className="w-4 h-4 text-muted-foreground hover:text-foreground transition-colors" />
                         </button>
-                        <button className="p-2 hover:bg-slate-100 rounded-lg transition-colors" title="Delete">
+                        <button onClick={() => handleDeleteCourse(course.id)} className="p-2 hover:bg-slate-100 rounded-lg transition-colors" title="Delete">
                           <Trash2 className="w-4 h-4 text-muted-foreground hover:text-red-500 transition-colors" />
-                        </button>
-                        <button className="p-2 hover:bg-slate-100 rounded-lg transition-colors">
-                          <MoreVertical className="w-4 h-4 text-muted-foreground hover:text-foreground transition-colors" />
                         </button>
                       </div>
                     </td>
@@ -213,12 +218,21 @@ export function CoursesContent() {
       ) : (
         <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center">
           <p className="text-lg text-muted-foreground mb-4">No courses found</p>
-          <Button className="bg-primary hover:bg-primary/90 text-white">
+          <Button onClick={openAddModal} className="bg-primary hover:bg-primary/90 text-white">
             <Plus className="w-4 h-4 mr-2" />
             Add Your First Course
           </Button>
         </div>
       )}
+
+      {/* Course Modal */}
+      <CourseModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleModalSubmit}
+        initialData={selectedCourse}
+        mode={modalMode}
+      />
     </div>
   )
 }

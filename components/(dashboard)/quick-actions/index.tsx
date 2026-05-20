@@ -8,7 +8,7 @@ const actions = [
     title: 'Add New Course',
     description: 'Create a new course for examination',
     icon: BookOpen,
-    href: '/dashboard/courses?action=add',
+    href: '/dashboard/courses',
     color: 'from-blue-500/10 to-blue-600/10',
     iconColor: 'text-blue-600',
   },
@@ -16,7 +16,7 @@ const actions = [
     title: 'Add Hall',
     description: 'Register a new examination hall',
     icon: Building2,
-    href: '/dashboard/halls?action=add',
+    href: '/dashboard/halls',
     color: 'from-purple-500/10 to-purple-600/10',
     iconColor: 'text-purple-600',
   },
@@ -28,14 +28,14 @@ const actions = [
     color: 'from-green-500/10 to-green-600/10',
     iconColor: 'text-green-600',
   },
-  {
-    title: 'Export Schedule',
-    description: 'Download schedule as PDF',
-    icon: Download,
-    href: '/dashboard/exports',
-    color: 'from-orange-500/10 to-orange-600/10',
-    iconColor: 'text-orange-600',
-  },
+  // {
+  //   title: 'Export Schedule',
+  //   description: 'Download schedule as PDF',
+  //   icon: Download,
+  //   href: '/dashboard/exports',
+  //   color: 'from-orange-500/10 to-orange-600/10',
+  //   iconColor: 'text-orange-600',
+  // },
   {
     title: 'Detect Conflicts',
     description: 'Review scheduling conflicts',
@@ -44,21 +44,21 @@ const actions = [
     color: 'from-red-500/10 to-red-600/10',
     iconColor: 'text-red-600',
   },
-  {
-    title: 'Settings',
-    description: 'Configure system settings',
-    icon: Settings,
-    href: '/dashboard/settings',
-    color: 'from-slate-500/10 to-slate-600/10',
-    iconColor: 'text-slate-600',
-  },
+  // {
+  //   title: 'Settings',
+  //   description: 'Configure system settings',
+  //   icon: Settings,
+  //   href: '/dashboard/settings',
+  //   color: 'from-slate-500/10 to-slate-600/10',
+  //   iconColor: 'text-slate-600',
+  // },
 ]
 
 export function QuickActions() {
   return (
     <div>
       <h2 className="text-2xl font-bold text-foreground mb-6">Quick Actions</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {actions.map((action, index) => {
           const Icon = action.icon
           return (

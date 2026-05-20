@@ -9,7 +9,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6 md:space-y-8 pt-24">
       <StatsCards />
-      <ScheduleGeneratorCard />
+      {/* <ScheduleGeneratorCard /> */}
       <QuickActions />
       <ScheduleAnalytics />
       <RecentTimetables />
