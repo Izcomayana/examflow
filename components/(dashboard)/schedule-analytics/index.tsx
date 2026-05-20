@@ -1,23 +1,82 @@
 'use client'
 
+import { useHallStore } from '@/store/hall-store'
+import { useTimetableStore } from '@/store/timetable-store'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 
-const scheduleData = [
-  { day: 'Mon', exams: 18 },
-  { day: 'Tue', exams: 22 },
-  { day: 'Wed', exams: 19 },
-  { day: 'Thu', exams: 25 },
-  { day: 'Fri', exams: 21 },
-]
-
-const hallUtilizationData = [
-  { name: 'Hall A', value: 40, color: '#1E40AF' },
-  { name: 'Hall B', value: 30, color: '#4F46E5' },
-  { name: 'Hall C', value: 20, color: '#10B981' },
-  { name: 'Hall D', value: 10, color: '#F59E0B' },
-]
-
 export function ScheduleAnalytics() {
+  const { timetable } =
+    useTimetableStore()
+
+  const { halls } =
+    useHallStore()
+
+  const groupedByDay: Record<
+    string,
+    number
+  > = {}
+
+  timetable.forEach((item) => {
+    const day = new Date(
+      item.date
+    ).toLocaleDateString(
+      'en-US',
+      {
+        weekday: 'short',
+      }
+    )
+
+    groupedByDay[day] =
+      (groupedByDay[day] || 0) + 1
+  })
+
+  const scheduleData =
+    Object.entries(groupedByDay).map(
+      ([day, exams]) => ({
+        day,
+        exams,
+      })
+    )
+
+  const hallUtilizationData =
+    halls.map((hall, index) => {
+      const usage =
+        timetable.filter(
+          (item) =>
+            item.hall === hall.name
+        ).length
+
+      return {
+        name: hall.name,
+        value: usage,
+        color: [
+          '#1E40AF',
+          '#4F46E5',
+          '#10B981',
+          '#F59E0B',
+          '#EF4444',
+        ][index % 5],
+      }
+    })
+
+  if (timetable.length === 0) {
+    return (
+      <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center">
+        <BarChart className="w-14 h-14 text-muted-foreground mx-auto mb-4" />
+
+        <h3 className="text-lg font-bold text-foreground mb-2">
+          No Analytics Yet
+        </h3>
+
+        <p className="text-muted-foreground">
+          Generate a timetable to
+          view analytics and hall
+          utilization reports.
+        </p>
+      </div>
+    )
+  }
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* Exam Schedule Distribution */}

@@ -9,7 +9,6 @@ interface Timetable {
   semester: string
   courses: number
   createdDate: string
-  approvalStatus: 'approved' | 'pending' | 'rejected'
 }
 
 interface TimetableModalProps {
@@ -26,7 +25,6 @@ export function TimetableModal({ isOpen, onClose, onSubmit, initialData, mode }:
       semester: '',
       courses: 0,
       createdDate: new Date().toISOString().split('T')[0],
-      approvalStatus: 'pending',
     }
   )
 
@@ -51,7 +49,6 @@ export function TimetableModal({ isOpen, onClose, onSubmit, initialData, mode }:
         semester: '',
         courses: 0,
         createdDate: new Date().toISOString().split('T')[0],
-        approvalStatus: 'pending',
       })
       onClose()
     }
@@ -142,23 +139,6 @@ export function TimetableModal({ isOpen, onClose, onSubmit, initialData, mode }:
               }`}
             />
             {errors.createdDate && <p className="text-xs text-destructive mt-1">{errors.createdDate as any}</p>}
-          </div>
-
-          {/* Approval Status */}
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Approval Status
-            </label>
-            <select
-              name="approvalStatus"
-              value={formData.approvalStatus}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20"
-            >
-              <option value="pending">Pending</option>
-              <option value="approved">Approved</option>
-              <option value="rejected">Rejected</option>
-            </select>
           </div>
 
           {/* Buttons */}

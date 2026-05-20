@@ -3,25 +3,152 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Zap, Download } from 'lucide-react'
-
-const generatedTableData = [
-  { course: 'Data Structures', hall: 'Hall A', date: '2024-01-15', time: '09:00 AM', status: 'approved' },
-  { course: 'Web Development', hall: 'Hall B', date: '2024-01-16', time: '02:00 PM', status: 'approved' },
-  { course: 'Database Design', hall: 'Hall C', date: '2024-01-17', time: '10:00 AM', status: 'approved' },
-  { course: 'AI & ML', hall: 'Hall D', date: '2024-01-18', time: '01:00 PM', status: 'approved' },
-]
+import { useCourseStore } from '@/store/course-store'
+import { useHallStore } from '@/store/hall-store'
+import { useTimetableStore } from '@/store/timetable-store'
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
 
 export function GeneratorContent() {
   const [hasGenerated, setHasGenerated] = useState(false)
   const [loading, setLoading] = useState(false)
+  const { courses } = useCourseStore()
+  const { halls } = useHallStore()
+
+  const {
+    timetable,
+    setTimetable,
+  } = useTimetableStore()
 
   const handleGenerate = () => {
+    if (!courses.length) {
+      alert(
+        'Please add courses first'
+      )
+      return
+    }
+
+    if (!halls.length) {
+      alert(
+        'Please add halls first'
+      )
+      return
+    }
+
     setLoading(true)
+
     setTimeout(() => {
+      const availableHalls =
+        halls.filter(
+          (hall) =>
+            hall.availability ===
+            'available'
+        )
+
+      const timeSlots = [
+        '09:00 AM',
+        '12:00 PM',
+        '03:00 PM',
+      ]
+
+      const startDate =
+        new Date('2026-06-15')
+
+      const generatedData =
+        courses.map(
+          (course, index) => {
+            const suitableHall =
+              availableHalls.find(
+                (hall) =>
+                  hall.capacity >=
+                  course.students
+              )
+
+            const dayOffset =
+              Math.floor(
+                index /
+                timeSlots.length
+              )
+
+            const examDate =
+              new Date(startDate)
+
+            examDate.setDate(
+              startDate.getDate() +
+              dayOffset
+            )
+
+            return {
+              id: Date.now() + index,
+              course:
+                course.name,
+              hall:
+                suitableHall?.name ||
+                'No Hall Available',
+              date:
+                examDate
+                  .toISOString()
+                  .split('T')[0],
+              time:
+                timeSlots[
+                index %
+                timeSlots.length
+                ],
+            }
+          }
+        )
+
+      setTimetable(
+        generatedData
+      )
+
       setLoading(false)
       setHasGenerated(true)
-    }, 2000)
+    }, 1500)
   }
+
+    const handleDownloadPDF = () => {
+      const doc = new jsPDF()
+  
+      doc.setFontSize(20)
+      doc.text(
+        'ExamFlow Examination Timetable',
+        14,
+        20
+      )
+  
+      doc.setFontSize(12)
+  
+      doc.text(
+        `Generated: ${new Date().toLocaleDateString()}`,
+        14,
+        30
+      )
+  
+      autoTable(doc, {
+        startY: 40,
+        head: [
+          [
+            'Course',
+            'Hall',
+            'Date',
+            'Time',
+          ],
+        ],
+        body: timetable.map(
+          (item) => [
+            item.course,
+            item.hall,
+            item.date,
+            item.time,
+          ]
+        ),
+      })
+  
+      doc.save(
+        'examflow-timetable.pdf'
+      )
+    }
 
   return (
     <div className="space-y-6 mt-16">
@@ -37,24 +164,16 @@ export function GeneratorContent() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {/* Semester */}
-          <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">Semester</label>
-            <select className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm bg-white">
-              <option>2024 Semester 1</option>
-              <option>2024 Semester 2</option>
-              <option>2023 Semester 1</option>
-            </select>
-          </div>
+          <select className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm bg-white">
+            <option>2026 Semester 1</option>
+            <option>2026 Semester 2</option>
+          </select>
 
           {/* Academic Session */}
-          <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">Academic Session</label>
-            <select className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm bg-white">
-              <option>2023/2024</option>
-              <option>2022/2023</option>
-              <option>2021/2022</option>
-            </select>
-          </div>
+          <select className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm bg-white">
+            <option>2025/2026</option>
+            <option>2026/2027</option>
+          </select>
 
           {/* Department */}
           <div>
@@ -92,6 +211,7 @@ export function GeneratorContent() {
             <label className="block text-sm font-semibold text-foreground mb-2">Start Date</label>
             <input
               type="date"
+              defaultValue="2026-06-15"
               className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm"
             />
           </div>
@@ -120,7 +240,7 @@ export function GeneratorContent() {
       </div>
 
       {/* Generated Table */}
-      {hasGenerated && (
+      {timetable.length > 0 && (
         <div className="space-y-6 animate-fade-in-up">
           {/* AI Explanation */}
           <div className="bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/20 rounded-2xl p-6">
@@ -133,7 +253,7 @@ export function GeneratorContent() {
           <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
             <div className="p-6 border-b border-slate-200 flex items-center justify-between">
               <h3 className="text-lg font-bold text-foreground">Generated Timetable</h3>
-              <Button className="bg-accent hover:bg-accent/90 text-white">
+              <Button onClick={handleDownloadPDF} className="bg-accent hover:bg-accent/90 text-white">
                 <Download className="w-4 h-4 mr-2" />
                 Export
               </Button>
@@ -147,21 +267,15 @@ export function GeneratorContent() {
                     <th className="px-6 py-4 text-left text-xs font-semibold text-muted-foreground uppercase">Hall</th>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-muted-foreground uppercase">Date</th>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-muted-foreground uppercase">Time</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-muted-foreground uppercase">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {generatedTableData.map((row, i) => (
+                  {timetable.map((row, i) => (
                     <tr key={i} className="border-b border-slate-200 hover:bg-slate-50 transition-colors">
                       <td className="px-6 py-4 font-semibold text-foreground">{row.course}</td>
                       <td className="px-6 py-4 text-muted-foreground">{row.hall}</td>
                       <td className="px-6 py-4 text-muted-foreground">{row.date}</td>
                       <td className="px-6 py-4 text-muted-foreground">{row.time}</td>
-                      <td className="px-6 py-4">
-                        <span className="px-3 py-1 rounded-full text-xs font-semibold bg-secondary/10 text-secondary">
-                          {row.status}
-                        </span>
-                      </td>
                     </tr>
                   ))}
                 </tbody>

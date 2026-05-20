@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Search, Plus, Edit, Trash2, MoreVertical } from 'lucide-react'
 import { CourseModal } from '../(modals)/course-modal'
 import { useCourseStore } from '@/store/course-store'
+import { useSearchParams } from 'next/navigation'
 
 interface Course {
   id: number
@@ -88,6 +89,17 @@ export function CoursesContent() {
     deleteCourse(id)
   }
 
+  const searchParams =
+  useSearchParams()
+
+const openModalQuery =
+  searchParams.get('openModal')
+
+  useEffect(() => {
+  if (openModalQuery === 'true') {
+    openAddModal()
+  }
+}, [openModalQuery])
   return (
     <div className="space-y-6 pt-20">
       {/* Header */}

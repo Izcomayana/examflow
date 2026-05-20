@@ -2,35 +2,115 @@
 
 import { AlertTriangle, Clock, Users, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-
-const conflictCards = [
-  {
-    type: 'Hall Conflict',
-    icon: AlertTriangle,
-    color: 'from-red-500/10 to-red-600/10',
-    iconColor: 'text-red-600',
-    description: 'Two courses scheduled in the same hall at overlapping times',
-    count: 0,
-  },
-  {
-    type: 'Time Conflict',
-    icon: Clock,
-    color: 'from-orange-500/10 to-orange-600/10',
-    iconColor: 'text-orange-600',
-    description: 'Exam timing overlaps causing scheduling conflicts',
-    count: 0,
-  },
-  {
-    type: 'Course Clash',
-    icon: Users,
-    color: 'from-yellow-500/10 to-yellow-600/10',
-    iconColor: 'text-yellow-600',
-    description: 'Students have multiple exams scheduled at the same time',
-    count: 0,
-  },
-]
+import { useTimetableStore } from '@/store/timetable-store'
+import { useCourseStore } from '@/store/course-store'
+import { useHallStore } from '@/store/hall-store'
 
 export function ConflictsContent() {
+  const { timetable } =
+    useTimetableStore()
+
+  const { courses } =
+    useCourseStore()
+
+  const { halls } =
+    useHallStore()
+
+  const hallConflicts: string[] = []
+  const capacityConflicts: string[] = []
+  const timeConflicts: string[] = []
+
+  timetable.forEach((exam, index) => {
+    // SAME HALL + SAME DATE + SAME TIME
+
+    const duplicate = timetable.find(
+      (item, i) =>
+        i !== index &&
+        item.hall === exam.hall &&
+        item.date === exam.date &&
+        item.time === exam.time
+    )
+
+    if (duplicate) {
+      hallConflicts.push(
+        `${exam.course} overlaps with ${duplicate.course}`
+      )
+    }
+
+    // CAPACITY CONFLICT
+
+    const course = courses.find(
+      (c) => c.name === exam.course
+    )
+
+    const hall = halls.find(
+      (h) => h.name === exam.hall
+    )
+
+    if (
+      course &&
+      hall &&
+      course.students > hall.capacity
+    ) {
+      capacityConflicts.push(
+        `${exam.course} exceeds ${hall.name} capacity`
+      )
+    }
+
+    // SAME TIME CONFLICT
+
+    const sameTime = timetable.find(
+      (item, i) =>
+        i !== index &&
+        item.date === exam.date &&
+        item.time === exam.time
+    )
+
+    if (sameTime) {
+      timeConflicts.push(
+        `${exam.course} conflicts with ${sameTime.course}`
+      )
+    }
+  })
+
+  const conflictCards = [
+    {
+      type: 'Hall Conflict',
+      icon: AlertTriangle,
+      color:
+        'from-red-500/10 to-red-600/10',
+      iconColor: 'text-red-600',
+      description:
+        'Two courses scheduled in the same hall at overlapping times',
+      count: hallConflicts.length,
+      data: hallConflicts,
+    },
+
+    {
+      type: 'Time Conflict',
+      icon: Clock,
+      color:
+        'from-orange-500/10 to-orange-600/10',
+      iconColor: 'text-orange-600',
+      description:
+        'Exam timing overlaps causing scheduling conflicts',
+      count: timeConflicts.length,
+      data: timeConflicts,
+    },
+
+    {
+      type: 'Capacity Conflict',
+      icon: Users,
+      color:
+        'from-yellow-500/10 to-yellow-600/10',
+      iconColor: 'text-yellow-600',
+      description:
+        'Hall capacity is too small for assigned students',
+      count: capacityConflicts.length,
+      data: capacityConflicts,
+    },
+  ]
+
   const totalConflicts = conflictCards.reduce((sum, card) => sum + card.count, 0)
 
   return (
@@ -103,8 +183,31 @@ export function ConflictsContent() {
           <div className="p-6 border-b border-slate-200">
             <h3 className="font-bold text-foreground">Detailed Conflicts</h3>
           </div>
-          <div className="p-6 text-center">
-            <p className="text-muted-foreground">No detailed conflict information available</p>
+          <div className="divide-y divide-slate-200">
+            {conflictCards.flatMap((card) =>
+              card.data.map(
+                (conflict, index) => (
+                  <div
+                    key={`${card.type}-${index}`}
+                    className="p-4 flex items-center justify-between"
+                  >
+                    <div>
+                      <p className="font-semibold text-foreground">
+                        {conflict}
+                      </p>
+
+                      <p className="text-sm text-muted-foreground">
+                        {card.type}
+                      </p>
+                    </div>
+
+                    <span className="px-3 py-1 rounded-full bg-red-500/10 text-red-600 text-xs font-semibold">
+                      Conflict
+                    </span>
+                  </div>
+                )
+              )
+            )}
           </div>
         </div>
       )}

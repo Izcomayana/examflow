@@ -2,10 +2,55 @@
 
 import Link from 'next/link'
 import { CheckCircle2, AlertTriangle } from 'lucide-react'
+import { useCourseStore } from '@/store/course-store'
+import { useHallStore } from '@/store/hall-store'
+import { useTimetableStore } from '@/store/timetable-store'
 
 export function ConflictDetectionWidget() {
-  const hasConflicts = false
+  const { courses } = useCourseStore()
+  const { halls } = useHallStore()
+  const { timetable } = useTimetableStore()
 
+  const conflicts: string[] = []
+
+  // Hall conflict
+  timetable.forEach((exam, index) => {
+    const duplicate = timetable.find(
+      (item, i) =>
+        i !== index &&
+        item.hall === exam.hall &&
+        item.date === exam.date &&
+        item.time === exam.time
+    )
+
+    if (duplicate) {
+      conflicts.push(
+        `${exam.course} overlaps with ${duplicate.course}`
+      )
+    }
+
+    // Capacity conflict
+    const course = courses.find(
+      (c) => c.name === exam.course
+    )
+
+    const hall = halls.find(
+      (h) => h.name === exam.hall
+    )
+
+    if (
+      course &&
+      hall &&
+      course.students > hall.capacity
+    ) {
+      conflicts.push(
+        `${exam.course} exceeds ${hall.name} capacity`
+      )
+    }
+  })
+
+  const hasConflicts =
+    conflicts.length > 0
   return (
     <div className="bg-gradient-to-br from-green-500/5 to-secondary/5 border border-secondary/30 rounded-2xl p-8">
       <div className="flex items-start justify-between">
@@ -19,7 +64,18 @@ export function ConflictDetectionWidget() {
             <h3 className="text-lg font-bold text-foreground mb-2">Conflict Detection Center</h3>
             {hasConflicts ? (
               <div className="space-y-2">
-                <p className="text-foreground font-semibold">⚠ CSC401 overlaps with MTH401</p>
+                <div className="space-y-2">
+                  {conflicts
+                    .slice(0, 2)
+                    .map((conflict, index) => (
+                      <p
+                        key={index}
+                        className="text-foreground font-semibold"
+                      >
+                        ⚠ {conflict}
+                      </p>
+                    ))}
+                </div>
                 <p className="text-sm text-muted-foreground">Both courses scheduled on Monday at 10:00 AM in Hall A</p>
               </div>
             ) : (
