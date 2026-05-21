@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button'
 import { Plus, Edit, Trash2, MapPin, Users } from 'lucide-react'
 import { HallModal } from '../(modals)/hall-modal'
 import { useHallStore } from '@/store/hall-store'
-import { useSearchParams } from 'next/navigation'
 
 interface Hall {
   id: number
@@ -61,18 +60,6 @@ export function HallsContent() {
   ) => {
     deleteHall(id)
   }
-
-  const searchParams =
-  useSearchParams()
-
-const openModalQuery =
-  searchParams.get('openModal')
-
-useEffect(() => {
-  if (openModalQuery === 'true') {
-    openAddModal()
-  }
-}, [openModalQuery])
 
   return (
     <div className="space-y-6 pt-16">
