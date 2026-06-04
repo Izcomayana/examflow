@@ -23,14 +23,14 @@ export function BrandingSection() {
         {/* Logo */}
         <div className="mb-8 inline-flex items-center justify-center gap-3">
           <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center border border-white/30">
-            <span className="text-2xl font-bold text-white">E</span>
+            <span className="text-2xl font-bold text-white">H</span>
           </div>
-          <span className="text-3xl font-bold text-white">ExamFlow</span>
+          <span className="text-3xl font-bold text-white">Hallmark University</span>
         </div>
 
         {/* Main Text */}
         <h1 className="text-4xl font-bold text-white mb-4 leading-tight">
-          Intelligent Exam Scheduling for Modern Institutions
+          Hallmark University Exam Schedule Optimizer
         </h1>
         <p className="text-white/80 text-lg mb-12">
           Automate your exam scheduling, eliminate conflicts, and optimize resource allocation.

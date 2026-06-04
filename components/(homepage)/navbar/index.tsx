@@ -28,9 +28,9 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">E</span>
+              <span className="text-white font-bold text-lg">H</span>
             </div>
-            <span className="font-bold text-xl text-foreground">ExamFlow</span>
+            <span className="font-bold text-xl text-foreground">Hallmark</span>
           </div>
 
           {/* Nav Links */}

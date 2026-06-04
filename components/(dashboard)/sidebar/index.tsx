@@ -35,11 +35,11 @@ export function Sidebar() {
         <div className="p-6 border-b border-slate-800 flex items-center justify-between">
           <Link href="/" className={`flex items-center gap-3 ${isCollapsed ? 'justify-center w-full' : ''}`}>
             <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-bold text-lg">E</span>
+              <span className="text-white font-bold text-lg">H</span>
             </div>
             {!isCollapsed && (
               <div>
-                <p className="font-bold text-white text-lg">ExamFlow</p>
+                <p className="font-bold text-white text-lg">Hallmark</p>
                 <p className="text-xs text-slate-400">v1.0</p>
               </div>
             )}

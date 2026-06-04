@@ -29,14 +29,14 @@ export default function HeroSection() {
             {/* Main Heading */}
             <div className="space-y-4">
               <h1
-                className={`text-5xl md:text-6xl font-bold text-foreground leading-tight text-balance transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                className={`text-4xl md:text-6xl font-bold text-foreground leading-tight text-balance transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
                   }`}
                 style={{ animationDelay: '0.1s' }}
               >
-                Smart Exam Scheduling Made Effortless
+                Hallmark University Exam Schedule Optimizer
               </h1>
               <p
-                className={`text-lg text-muted-foreground leading-relaxed text-balance transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                className={`text-base text-muted-foreground leading-relaxed text-balance transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'
                   }`}
                 style={{ animationDelay: '0.2s' }}
               >

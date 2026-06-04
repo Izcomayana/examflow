@@ -56,7 +56,7 @@ export function LoginForm() {
       {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-foreground mb-2">Welcome Back</h2>
-        <p className="text-muted-foreground">Sign in to access the ExamFlow dashboard</p>
+        <p className="text-muted-foreground">Sign in to access the Hallmark dashboard</p>
       </div>
 
       {/* Glassmorphism Card */}
@@ -180,9 +180,9 @@ export function LoginForm() {
       <div className="lg:hidden mt-8 text-center">
         <div className="inline-flex items-center justify-center gap-2 mb-4">
           <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold">E</span>
+            <span className="text-white font-bold">H</span>
           </div>
-          <span className="text-2xl font-bold text-foreground">ExamFlow</span>
+          <span className="text-2xl font-bold text-foreground">Hallmark</span>
         </div>
         <p className="text-muted-foreground text-sm">Intelligent Exam Scheduling</p>
       </div>

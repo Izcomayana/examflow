@@ -15,9 +15,9 @@ export default function Footer() {
             }`}>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">E</span>
+                <span className="text-white font-bold text-lg">H</span>
               </div>
-              <span className="font-bold text-xl">ExamFlow</span>
+              <span className="font-bold text-xl">Hallmark University</span>
             </div>
             <p className="text-white/60 text-sm">
               Smart exam scheduling made simple.
@@ -96,7 +96,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/60 text-sm">© 2026 ExamFlow. All rights reserved.</p>
+          <p className="text-white/60 text-sm">© 2026 Hallmark University. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="#" className="text-white/60 hover:text-white transition-colors text-sm">
               Twitter
